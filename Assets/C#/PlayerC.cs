@@ -12,12 +12,17 @@ public class PlayerCtrl : MonoBehaviour{
 
     public Image PlayerHPBar_HP;
     public int PlayerHP = 100;
-    
+
+    public GameObject PlayerSword;
+    public bool PlayerSwordEnabled = false;
+
+    public bool PlayerAttacking = false;
+
 private void Start(){
     controller = GetComponent<CharacterController>();
     Player_Animator_Controller = GetComponent<Animator>();
-    gameObject PlayerHPBar_HP = GameObject.Find("HP");
-    PlayerHPBar_HP = 
+    //gameObject PlayerHPBar_HP = GameObject.Find("HP");
+    //PlayerHPBar_HP = 
 }
 
 private void Update(){
@@ -44,6 +49,10 @@ private void Update(){
         if (Input.GetKeyDown(KeyCode.B)){
             Player_Animator_Controller.SetTrigger("PlayerBoxing");
         }
+        if (Input.GetKeyDown(KeyCode.T) && PlayerSwordEnabled){
+            Player_Animator_Controller.SetTrigger("PlayerSwordATK");
+        }
+        PlayerAttacking = Player_Animator_Controller.GetFloat("SwordATKTime") > 0.01f? true : false;
 
     }
 
@@ -57,6 +66,16 @@ private void Update(){
 bool isGrounded(){
     float groundCheckDistance = 1f;
     return Physics.Raycast(transform.position,Vector3.down,groundCheckDistance);
+}
+
+private void OnTriggerEnter(Collider hit){
+    print("hit");
+    if (hit.gameObject.name == "Sword"){
+        PlayerSwordEnabled = true;
+        Destroy(hit.gameObject);
+        PlayerSword.SetActive(true);
+        print("hit Sword");
+    }
 }
 
 }
