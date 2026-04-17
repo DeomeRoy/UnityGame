@@ -16,7 +16,6 @@ public class BoxInterraction : MonoBehaviour
     {
         
     }
-
     void OnTriggerEnter(Collider hit){
         if (hit.gameObject.name == "Player_Sword" && _PlayerCtrl.PlayerAttacking){
             Destroy(gameObject);

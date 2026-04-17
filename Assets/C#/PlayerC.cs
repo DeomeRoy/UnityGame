@@ -69,7 +69,6 @@ bool isGrounded(){
 }
 
 private void OnTriggerEnter(Collider hit){
-    print("hit");
     if (hit.gameObject.name == "Sword"){
         PlayerSwordEnabled = true;
         Destroy(hit.gameObject);
