@@ -33,7 +33,7 @@ public class NPCctrl : MonoBehaviour{
     }
 
     void Update(){
-        NPC_HPimg.fillAmount = (float)NPC_HP / NPC_maxHP;
+        // NPC_HPimg.fillAmount = (float)NPC_HP / NPC_maxHP;
         NPCwalkSpeed = NPCnav.velocity.magnitude;
         NPCanimator.SetFloat("WalkSpeed", NPCwalkSpeed);
         float MPCplayeristance = Vector3.Distance(Target.position, transform.position);
