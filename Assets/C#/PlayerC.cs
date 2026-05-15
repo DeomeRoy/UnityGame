@@ -18,11 +18,17 @@ public class PlayerCtrl : MonoBehaviour{
 
     public bool PlayerAttacking = false;
 
+    public VariableJoystick Joystick;
+    public bool VirButSword = false;
+
+    TrailRenderer SwordTrail;
+
 private void Start(){
     controller = GetComponent<CharacterController>();
     Player_Animator_Controller = GetComponent<Animator>();
     //gameObject PlayerHPBar_HP = GameObject.Find("HP");
     //PlayerHPBar_HP = 
+    Joystick = FindObjectOfType<VariableJoystick>();
 }
 
 private void Update(){
@@ -49,11 +55,12 @@ private void Update(){
         if (Input.GetKeyDown(KeyCode.B)){
             Player_Animator_Controller.SetTrigger("PlayerBoxing");
         }
-        if (Input.GetKeyDown(KeyCode.T) && PlayerSwordEnabled){
+        if ((Input.GetKeyDown(KeyCode.T)|| VirButSword) && PlayerSwordEnabled){
             Player_Animator_Controller.SetTrigger("PlayerSwordATK");
+            VirButSword = false;
         }
         PlayerAttacking = Player_Animator_Controller.GetFloat("SwordATKTime") > 0.01f? true : false;
-
+        PlayerBoxing = Player_Animator_Controller.GetFloat("BoxingTime") > 0.01f? true : false;
     }
 
     // 處理重力
@@ -78,4 +85,18 @@ private void OnTriggerEnter(Collider hit){
 }
 
 }
+public void SwordAttkPressDown(){
+    VirButSword = true;
+}
+public void SwordAttkPressUp(){
+    VirButSword = false;
+}
 
+void SwordTrailRenderer(){
+    if (PlayerAttacking){
+        
+    }
+    else{
+        
+    }
+}
